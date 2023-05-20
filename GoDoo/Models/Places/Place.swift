@@ -7,6 +7,8 @@
 
 import Foundation
 
+//Place datatype
+
 struct Place: Identifiable {
     
     var id: String

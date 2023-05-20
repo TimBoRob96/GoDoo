@@ -8,6 +8,9 @@
 import SwiftUI
 
 
+//This is the loading view for the location request
+//Would also like to incorporate this or similiar when the api request is in progress.
+
 struct LoadingLocationView: View {
     
     @ObservedObject var locationManager: LocationManager
@@ -17,11 +20,12 @@ struct LoadingLocationView: View {
         if locationManager.hasFinishedLoading {
             KeywordListView(locationManager: locationManager)
         }   else {
-            VStack { Text("Finding your location...")
-                ProgressView() }
+            VStack {
+                Text("Finding your location...")
+                ProgressView()
+                
+            }
         }
-        
-
     }
 }
 

@@ -19,7 +19,6 @@
 		90F5E9922A18C9F80062CC8B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F5E98C2A18C9F80062CC8B /* ContentView.swift */; };
 		90F5E9932A18C9F80062CC8B /* PlacesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F5E98D2A18C9F80062CC8B /* PlacesListView.swift */; };
 		90F5E9942A18C9F80062CC8B /* PlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F5E98E2A18C9F80062CC8B /* PlaceView.swift */; };
-		90F5E9952A18C9F80062CC8B /* LocationRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F5E98F2A18C9F80062CC8B /* LocationRequestView.swift */; };
 		90F5E9972A18CBB70062CC8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90F5E9962A18CBB70062CC8B /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -37,7 +36,6 @@
 		90F5E98C2A18C9F80062CC8B /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		90F5E98D2A18C9F80062CC8B /* PlacesListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacesListView.swift; sourceTree = "<group>"; };
 		90F5E98E2A18C9F80062CC8B /* PlaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceView.swift; sourceTree = "<group>"; };
-		90F5E98F2A18C9F80062CC8B /* LocationRequestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationRequestView.swift; sourceTree = "<group>"; };
 		90F5E9962A18CBB70062CC8B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -106,7 +104,6 @@
 				90F5E98C2A18C9F80062CC8B /* ContentView.swift */,
 				90F5E98A2A18C9F80062CC8B /* KeywordListView.swift */,
 				90F5E98B2A18C9F80062CC8B /* LoadingView.swift */,
-				90F5E98F2A18C9F80062CC8B /* LocationRequestView.swift */,
 				90F5E98D2A18C9F80062CC8B /* PlacesListView.swift */,
 				90F5E98E2A18C9F80062CC8B /* PlaceView.swift */,
 			);
@@ -185,7 +182,6 @@
 				90F5E9812A18C4470062CC8B /* Keyword.swift in Sources */,
 				90F5E9832A18C4470062CC8B /* LocationManager.swift in Sources */,
 				90F5E9802A18C4470062CC8B /* PlacesManager.swift in Sources */,
-				90F5E9952A18C9F80062CC8B /* LocationRequestView.swift in Sources */,
 				90F5E9902A18C9F80062CC8B /* KeywordListView.swift in Sources */,
 				902942A62A18D93300488705 /* K.swift in Sources */,
 				90F5E9822A18C4470062CC8B /* PlacesData.swift in Sources */,

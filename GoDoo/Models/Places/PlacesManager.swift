@@ -7,6 +7,8 @@
 import CoreLocation
 import SwiftUI
 
+//The places manager requests a list of nearby places based on a co-ordinate provided by the user's current location.
+
 class PlacesManager: ObservableObject{
     
     var hasFinishedLoading: Bool = false
@@ -24,6 +26,8 @@ class PlacesManager: ObservableObject{
         performRequest(with: urlString)
     }
     
+    //Starts the URL Session and performs the api request.
+    
     func performRequest(with urlString: String)  {
         
         if let url = URL(string: urlString) {
@@ -32,34 +36,27 @@ class PlacesManager: ObservableObject{
             
             let task = session.dataTask(with: url) { data, response, error in
                 if error != nil {
-
+                    
                     print(error!)
-
+                    
                 }
                 
                 if let safeData = data {
-
+                    
                     if let places = self.parseJson(safeData) {
                         
-                        //return places
                         DispatchQueue.main.async {
                             self.placesList = places
                         }
-
-                        //print(places)
-                        //delegate?.didUpdatePlaces(places)
-                        
-                        //delegate?.didUpdateWeather(self, weather: weather)
                     }
-                    //print(dataString!)
-                    }
-                    
                 }
-            task.resume()
             }
-            
-            
+            task.resume()
+        }
+        
     }
+    
+    //When the session has retrieved the JSON data it is decoded using this method
     
     func parseJson(_ placesData: Data) -> [Place]? {
         
@@ -74,17 +71,16 @@ class PlacesManager: ObservableObject{
                 let id = result.place_id
                 let rating = result.rating
                 let place = Place(id: id, placeName: name, rating: rating)
-                //print(rating)
                 
                 places.append(place)
-
+                
             }
             
             return places
-
+            
             
         } catch {
-
+            
             print(error)
             return nil
         }

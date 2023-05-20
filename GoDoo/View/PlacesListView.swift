@@ -8,10 +8,12 @@
 import SwiftUI
 import CoreLocation
 
+//This is the Place List view, after requesting locations from the Api the list of places is returned showing the Name and rating of the place.
+
 struct PlacesListView: View {
     
     @ObservedObject var placesManager = PlacesManager()
-
+    
     
     let keyword: String
     let lat: CLLocationDegrees
@@ -23,15 +25,13 @@ struct PlacesListView: View {
             
             List(placesManager.placesList) { place in
                 VStack {
-                    NavigationLink(place.placeName, destination: PlaceView())
+                    
                     HStack {
-                        Text(place.placeName)
-                        Spacer()
+                        NavigationLink(place.placeName, destination: PlaceView(placeName: place.placeName, placeRating: place.rating))
                         if place.rating != nil {
-                            Text("\(place.rating!) stars")
+                            Text(String(place.rating!) + "Stars")
                         }
                     }
-
                 }
             }
             
@@ -43,7 +43,7 @@ struct PlacesListView: View {
         }
         .navigationBarTitle(keyword)
     }
-
+    
 }
 
 struct PlacesListView_Previews: PreviewProvider {

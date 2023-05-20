@@ -8,6 +8,9 @@
 import SwiftUI
 import CoreLocation
 
+//This is the start screen which initializes the location manager, currently the user only has an option to request their current location.
+// In the future be able to search locations.
+
 struct ContentView: View {
     
     @StateObject var locationManager = LocationManager()
@@ -24,8 +27,6 @@ struct ContentView: View {
                     KeywordListView(locationManager: locationManager)
                 }
                 
-
-
             } else {
                 VStack {
                     Image("Godoo")
@@ -39,16 +40,12 @@ struct ContentView: View {
                     .buttonStyle(.bordered)
                     .buttonBorderShape(.roundedRectangle)
                     .foregroundColor(.cyan)
-
+                    
                 }
             }
-
-            }
-            
         }
-            
-
     }
+}
 
 
 struct ContentView_Previews: PreviewProvider {

@@ -8,6 +8,10 @@
 import SwiftUI
 import CoreLocation
 
+//list of keywords that the user has access to stored in the Keyword.swift file.,
+// These are displayed in a table for the user to select from which then requests the places from the placeManager and progresses to the Place List View
+//user is also able to add their own keywords but they disappear whent he app is reloaded currently.
+
 struct KeywordListView: View {
     
     @ObservedObject var locationManager: LocationManager
@@ -30,14 +34,9 @@ struct KeywordListView: View {
                     NavigationLink(destination: PlacesListView(keyword: keyword.text, lat: locationManager.lat!, lon: locationManager.lon!)) {
                         Text(keyword.text)
                     }
-                    
                 }
-                
             }
-            
         }
-
-
     }
 }
 

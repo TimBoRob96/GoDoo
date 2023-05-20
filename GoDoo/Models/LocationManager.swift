@@ -9,6 +9,8 @@ import Foundation
 import CoreLocation
 import CoreLocationUI
 
+//Using core loocation gets the user's current longitude and latitude
+
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     let manager = CLLocationManager()
@@ -26,10 +28,14 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         manager.delegate = self
     }
     
+    //Location is requested here
+    
     func requestLocation() {
         requestedLocation = true
         manager.requestLocation()
     }
+    
+    //When the location has finised requesting and has updated successfully.
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
@@ -37,10 +43,12 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             lat = location.coordinate.latitude
             lon = location.coordinate.longitude
             hasFinishedLoading = true
-            print(lat)
-            ////////////////////print(String(lat))
+            //print(lat)
+
         }
     }
+    
+    // here we can make changes based on whether the user has allowed location to be taken.
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {

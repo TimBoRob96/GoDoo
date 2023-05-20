@@ -7,6 +7,8 @@
 
 import Foundation
 
+//This is what is decoded from the JSON before it is a places datatype
+
 struct PlacesData: Decodable {
     
     let results: [Result]

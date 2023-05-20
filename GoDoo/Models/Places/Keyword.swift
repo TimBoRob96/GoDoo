@@ -7,6 +7,8 @@
 
 import Foundation
 
+//This has the list of keywords that are default and also the struct of a keyword datatype
+
 class KeywordManager: ObservableObject {
     @Published var Keywords = [Keyword(text: "cafe", id: "11"), Keyword(text: "tea", id: "15"),Keyword(text: "castle", id: "24"),Keyword(text: "Walk", id: "3"),Keyword(text: "Waterfall", id: "9"),Keyword(text: "Bakery", id: "26")]
 }
