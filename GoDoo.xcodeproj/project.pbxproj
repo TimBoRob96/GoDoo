@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		902942A62A18D93300488705 /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902942A52A18D93300488705 /* K.swift */; };
 		90F5E9552A18C4040062CC8B /* GoDooApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F5E9542A18C4040062CC8B /* GoDooApp.swift */; };
 		90F5E97F2A18C4470062CC8B /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F5E9702A18C4470062CC8B /* Place.swift */; };
 		90F5E9802A18C4470062CC8B /* PlacesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F5E9712A18C4470062CC8B /* PlacesManager.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		902942A52A18D93300488705 /* K.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = K.swift; path = GoDoo/K.swift; sourceTree = SOURCE_ROOT; };
 		90F5E9512A18C4040062CC8B /* GoDoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoDoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90F5E9542A18C4040062CC8B /* GoDooApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoDooApp.swift; sourceTree = "<group>"; };
 		90F5E9702A18C4470062CC8B /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 		90F5E96D2A18C4470062CC8B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				902942A52A18D93300488705 /* K.swift */,
 				90F5E96F2A18C4470062CC8B /* Places */,
 				90F5E9742A18C4470062CC8B /* LocationManager.swift */,
 			);
@@ -184,6 +187,7 @@
 				90F5E9802A18C4470062CC8B /* PlacesManager.swift in Sources */,
 				90F5E9952A18C9F80062CC8B /* LocationRequestView.swift in Sources */,
 				90F5E9902A18C9F80062CC8B /* KeywordListView.swift in Sources */,
+				902942A62A18D93300488705 /* K.swift in Sources */,
 				90F5E9822A18C4470062CC8B /* PlacesData.swift in Sources */,
 				90F5E9942A18C9F80062CC8B /* PlaceView.swift in Sources */,
 				90F5E9932A18C9F80062CC8B /* PlacesListView.swift in Sources */,

@@ -9,18 +9,17 @@ import SwiftUI
 import CoreLocation
 
 struct KeywordListView: View {
-//    let lat: CLLocationDegrees
-//    let lon: CLLocationDegrees
+    
     @ObservedObject var locationManager: LocationManager
     @StateObject var keywordManager = KeywordManager()
     @State private var newKeyword: String = ""
     
-    //let keywords: [Keyword] = [Keyword(text: "cafe", id: "11"), Keyword(text: "tea", id: "15")]
+    
     
     var body: some View {
         NavigationView {
             VStack {
-
+                
                 Text("Look at these spots!")
                 TextField(/*@START_MENU_TOKEN@*/"Placeholder"/*@END_MENU_TOKEN@*/, text: $newKeyword)
                 Button(/*@START_MENU_TOKEN@*/"Button"/*@END_MENU_TOKEN@*/) {
@@ -30,8 +29,8 @@ struct KeywordListView: View {
                 List(keywordManager.Keywords) { keyword in
                     NavigationLink(destination: PlacesListView(keyword: keyword.text, lat: locationManager.lat!, lon: locationManager.lon!)) {
                         Text(keyword.text)
-            }
-
+                    }
+                    
                 }
                 
             }

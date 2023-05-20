@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct LoadingLocationView: View {
     
     @ObservedObject var locationManager: LocationManager
