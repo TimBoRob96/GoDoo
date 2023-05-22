@@ -25,37 +25,38 @@ struct KeywordListView: View {
             VStack {
                 
                 Text("Look at these spots!")
-                TextField(/*@START_MENU_TOKEN@*/"Placeholder"/*@END_MENU_TOKEN@*/, text: $newKeyword)
+                TextField("Placeholder", text: $newKeyword)
                 Button(/*@START_MENU_TOKEN@*/"Button"/*@END_MENU_TOKEN@*/) {
                     keywordManager.keywords.append(Keyword(text: newKeyword, id: "keyword\(newKeyword)"))
                     keywordManager.saveKeywords()
                     newKeyword = ""
                 }
                 
-                //MARK: - List View
+                //MARK: - List View for Keywords
                 
-                List(keywordManager.keywords) { keyword in
+                List { ForEach(keywordManager.keywords) { keyword in
                     
                     NavigationLink(destination: PlacesListView(keyword: keyword.text, lat: locationManager.lat!, lon: locationManager.lon!)) {
                         Text(keyword.text)
                         
                     }
                     
-
+                    
                 }
-                
-                
-//                .onDelete { indexSet in
-//                    keywordManager.keywords.remove(atOffsets: indexSet)
-//                }
-
+                    
+                .onDelete { indexSet in
+                    keywordManager.keywords.remove(atOffsets: indexSet)
+                    keywordManager.saveKeywords()
+                }
+                    
+                }
+            }.onAppear {
+                keywordManager.loadKeywords()
             }
-        }.onAppear {
-            keywordManager.loadKeywords()
+            
         }
         
     }
-
 }
 
 //struct KeywordListView_Previews: PreviewProvider {
