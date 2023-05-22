@@ -11,7 +11,6 @@ If you would like to contribute or contact me regarding the project please get i
 
 List of future updates: 
 
- - Set up persistant local data storage for keywords
  - Map View to the Places View
  - Text field instead of using current location
  - Add other fields to Places View, such as open times
