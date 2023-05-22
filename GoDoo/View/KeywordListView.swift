@@ -27,21 +27,39 @@ struct KeywordListView: View {
                 Text("Look at these spots!")
                 TextField(/*@START_MENU_TOKEN@*/"Placeholder"/*@END_MENU_TOKEN@*/, text: $newKeyword)
                 Button(/*@START_MENU_TOKEN@*/"Button"/*@END_MENU_TOKEN@*/) {
-                    keywordManager.Keywords.append(Keyword(text: newKeyword, id: "keyword\(newKeyword)"))
+                    keywordManager.keywords.append(Keyword(text: newKeyword, id: "keyword\(newKeyword)"))
+                    keywordManager.saveKeywords()
                     newKeyword = ""
                 }
-                List(keywordManager.Keywords) { keyword in
+                
+                //MARK: - List View
+                
+                List(keywordManager.keywords) { keyword in
+                    
                     NavigationLink(destination: PlacesListView(keyword: keyword.text, lat: locationManager.lat!, lon: locationManager.lon!)) {
                         Text(keyword.text)
+                        
                     }
+                    
+
                 }
+                
+                
+//                .onDelete { indexSet in
+//                    keywordManager.keywords.remove(atOffsets: indexSet)
+//                }
+
             }
+        }.onAppear {
+            keywordManager.loadKeywords()
         }
+        
     }
+
 }
 
 //struct KeywordListView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        KeywordListView(CL)
+//        KeywordListView(locationManager: LocationManager(), keywordManager: KeywordManager(), newKeyword: "")
 //    }
 //}
