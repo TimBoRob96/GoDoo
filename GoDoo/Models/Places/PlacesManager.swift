@@ -19,9 +19,11 @@ class PlacesManager: ObservableObject{
     let placesURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
     let apiKey = K.apiKey
     
-    func fetchPlaces(keyword: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
+    func fetchPlaces(keyword: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees, sliderRadius: Float) {
         
-        let urlString = "\(placesURL)location=\(latitude),\(longitude)&radius=10000&key=\(apiKey)&keyword=\(keyword)"
+        let radius = Int(round(sliderRadius * 1000))
+        
+        let urlString = "\(placesURL)location=\(latitude),\(longitude)&radius=\(radius)&key=\(apiKey)&keyword=\(keyword)"
         print(urlString)
         performRequest(with: urlString)
     }

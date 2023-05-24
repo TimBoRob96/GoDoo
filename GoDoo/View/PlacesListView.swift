@@ -18,6 +18,7 @@ struct PlacesListView: View {
     let keyword: String
     let lat: CLLocationDegrees
     let lon: CLLocationDegrees
+    let sliderRadius: Float
     
     
     var body: some View {
@@ -38,7 +39,7 @@ struct PlacesListView: View {
         }
         .onAppear {
             
-            placesManager.fetchPlaces(keyword: keyword, latitude: lat, longitude: lon)
+            placesManager.fetchPlaces(keyword: keyword, latitude: lat, longitude: lon, sliderRadius: sliderRadius)
             
         }
         .navigationBarTitle(keyword)
@@ -46,8 +47,8 @@ struct PlacesListView: View {
     
 }
 
-struct PlacesListView_Previews: PreviewProvider {
-    static var previews: some View {
-        PlacesListView(keyword: "walk", lat: CLLocationDegrees(), lon: CLLocationDegrees())
-    }
-}
+//struct PlacesListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PlacesListView(keyword: "walk", lat: CLLocationDegrees(), lon: CLLocationDegrees())
+//    }
+//}

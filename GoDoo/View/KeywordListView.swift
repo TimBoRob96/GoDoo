@@ -16,27 +16,37 @@ struct KeywordListView: View {
     
     @ObservedObject var locationManager: LocationManager
     @StateObject var keywordManager = KeywordManager()
-    @State private var newKeyword: String = ""
     
+    @State private var newKeyword: String = ""
+    @State var sliderValue: Float = 5
+  
     
     
     var body: some View {
+        
         NavigationView {
+
             VStack {
                 
                 Text("Look at these spots!")
+                    .padding()
                 TextField("Placeholder", text: $newKeyword)
-                Button(/*@START_MENU_TOKEN@*/"Button"/*@END_MENU_TOKEN@*/) {
+                    .padding()
+                Button("Add PlaceWord") {
                     keywordManager.keywords.append(Keyword(text: newKeyword, id: "keyword\(newKeyword)"))
                     keywordManager.saveKeywords()
                     newKeyword = ""
                 }
+                .buttonStyle(.borderedProminent)
+                Text(String(format: "%.1f", sliderValue) + "km")
+                Slider(value: $sliderValue, in: 0.1...10)
+                    .padding()
                 
                 //MARK: - List View for Keywords
                 
                 List { ForEach(keywordManager.keywords) { keyword in
                     
-                    NavigationLink(destination: PlacesListView(keyword: keyword.text, lat: locationManager.lat!, lon: locationManager.lon!)) {
+                    NavigationLink(destination: PlacesListView(keyword: keyword.text, lat: locationManager.lat!, lon: locationManager.lon!, sliderRadius: sliderValue)) {
                         Text(keyword.text)
                         
                     }
