@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreLocation
+import MapKit
 
 //This is the Place List view, after requesting locations from the Api the list of places is returned showing the Name and rating of the place.
 
@@ -28,7 +29,7 @@ struct PlacesListView: View {
                 VStack {
                     
                     HStack {
-                        NavigationLink(place.placeName, destination: PlaceView(placeName: place.placeName, placeRating: place.rating))
+                        NavigationLink(place.placeName, destination: PlaceView(place: place))
                         if place.rating != nil {
                             Text(String(place.rating!) + "Stars")
                         }
@@ -46,6 +47,7 @@ struct PlacesListView: View {
     }
     
 }
+
 
 //struct PlacesListView_Previews: PreviewProvider {
 //    static var previews: some View {

@@ -6,18 +6,21 @@
 //
 
 import SwiftUI
+import CoreLocation
+import MapKit
 
 //This is the view for each individual place after selecting the location from placelist view
 //To add a mapView to this!
 
 struct PlaceView: View {
     
-    let placeName: String
-    let placeRating: Double?
+    let place: Place
+    
+    @State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
     
     var rating: String {
-        if placeRating != nil {
-            return String(placeRating!) + "Stars"
+        if place.rating != nil {
+            return String(place.rating!) + "Stars"
         } else {
             return "No Rating"
         }
@@ -25,16 +28,37 @@ struct PlaceView: View {
 
     var body: some View {
         VStack {
-            Text(placeName)
+            Text(place.placeName)
                 .font(.largeTitle)
             Text(rating)
                 .font(.headline)
+            
+            
+            Map(coordinateRegion: $region)
+                .frame(width: 300, height: 300)
+                .padding()
+            Button("Go!") {
+                //region.center = CLLocationCoordinate2D(latitude: place.latComp, longitude: place.lonComp)
+                region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: place.latComp, longitude: place.lonComp), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+            }
+            .buttonStyle(.borderedProminent)
+            
         }
+        .onAppear {
+            //region =
+            region.center = CLLocationCoordinate2D(latitude: place.latComp, longitude: place.lonComp)
+        }
+        
     }
+    
 }
 
-struct PlaceView_Previews: PreviewProvider {
-    static var previews: some View {
-        PlaceView(placeName: "Test", placeRating: 0.01)
-    }
-}
+
+
+
+
+//struct PlaceView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PlaceView(placeName: "Test", placeRating: 0.01)
+//    }
+//}

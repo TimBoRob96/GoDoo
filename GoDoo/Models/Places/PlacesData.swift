@@ -20,6 +20,16 @@ struct Result: Decodable {
     let name: String
     let place_id: String
     let rating: Double?
+    let geometry: Geometry
     //let types: String
     //let type: String
+}
+
+struct Geometry: Decodable {
+    let location: Location
+}
+
+struct Location: Decodable {
+    let lat: Float
+    let lng: Float
 }

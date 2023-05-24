@@ -6,6 +6,7 @@
 //
 import CoreLocation
 import SwiftUI
+import MapKit
 
 //The places manager requests a list of nearby places based on a co-ordinate provided by the user's current location.
 
@@ -72,7 +73,9 @@ class PlacesManager: ObservableObject{
                 let name = result.name
                 let id = result.place_id
                 let rating = result.rating
-                let place = Place(id: id, placeName: name, rating: rating)
+                let lat = result.geometry.location.lat
+                let lon = result.geometry.location.lng
+                let place = Place(id: id, placeName: name, rating: rating, lat: lat, lon: lon)
                 
                 places.append(place)
                 
@@ -89,5 +92,7 @@ class PlacesManager: ObservableObject{
         
         
     }
+    
+
     
 }
