@@ -77,6 +77,7 @@ class PlacesManager: ObservableObject{
                 let lon = result.geometry.location.lng
                 let place = Place(id: id, placeName: name, rating: rating, lat: lat, lon: lon)
                 
+                
                 places.append(place)
                 
             }
