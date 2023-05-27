@@ -23,23 +23,20 @@ struct PlacesListView: View {
     
     
     var body: some View {
-        NavigationView {
+
             
             List(placesManager.placesList) { place in
                 VStack {
                     
                     HStack {
                         NavigationLink(place.placeName, destination: PlaceView(place: place))
-//                        if place.rating != nil {
-//                            Text(String(place.rating!) + "Stars")
-//                        }
+
                         Text(place.getLocation(latitude: lat, longitude: lon) + "km")
                         
                     }
                 }
             }
-            
-        }
+
         .onAppear {
             
             placesManager.fetchPlaces(keyword: keyword, latitude: lat, longitude: lon, sliderRadius: sliderRadius)

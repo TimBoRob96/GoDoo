@@ -24,7 +24,7 @@ struct KeywordListView: View {
     
     var body: some View {
         
-        NavigationView {
+       // NavigationView {
 
             VStack {
                 
@@ -62,9 +62,10 @@ struct KeywordListView: View {
                 }
             }.onAppear {
                 keywordManager.loadKeywords()
+
             }
             
-        }
+      //  }
         
     }
 }

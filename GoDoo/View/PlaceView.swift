@@ -41,10 +41,19 @@ struct PlaceView: View {
             Button("Favourite") {
                 //region.center = CLLocationCoordinate2D(latitude: place.latComp, longitude: place.lonComp)
                 region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: place.latComp, longitude: place.lonComp), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+                
+                if favouriteManager.favourites.contains(where: {favourite in favourite.id == place.id}) {
+                    print("already favourited")
+                } else {
+                    let newFavourite = Favourite(name: place.placeName, id: place.id)
+                    
+                    
+                    
+                    favouriteManager.favourites.append(newFavourite)
+                    favouriteManager.saveFavourites()
+                }
+                
 
-                let newFavourite = Favourite(name: place.placeName, id: place.id)
-                favouriteManager.favourites.append(newFavourite)
-                favouriteManager.saveFavourites()
                 
             }
             .buttonStyle(.borderedProminent)

@@ -15,17 +15,29 @@ struct LoadingLocationView: View {
     
     @ObservedObject var locationManager: LocationManager
     
+    let currentLocation: Bool
+    
     var body: some View {
         
         if locationManager.hasFinishedLoading {
             KeywordListView(locationManager: locationManager)
+
         }   else {
             VStack {
                 Text("Finding your location...")
                 ProgressView()
                 
             }
+            .onAppear {
+                if currentLocation {
+                    locationManager.requestLocation()
+                }
+                
+
+            }
+            
         }
+
     }
 }
 

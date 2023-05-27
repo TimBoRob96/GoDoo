@@ -14,36 +14,41 @@ import CoreLocation
 struct ContentView: View {
     
     @StateObject var locationManager = LocationManager()
+    @State var userLocation = ""
     
     var body: some View {
         TabView {
             
             NavigationView {
                 
-                if locationManager.requestedLocation {
-                    LoadingLocationView(locationManager: locationManager)
-                    
-                    if locationManager.hasFinishedLoading {
-                        
-                        KeywordListView(locationManager: locationManager)
-                    }
-                    
-                } else {
+
                     VStack {
                         Image("Godoo")
                             .padding()
+                        NavigationLink(destination: LoadingLocationView(locationManager: locationManager, currentLocation: true)) {
+//                            Button("Use Current Location") {
+                                Text("Use Current Location")
+                                //locationManager.requestLocation()
+//                                print("preessed")
+                            }
+                            
+                            .buttonStyle(.bordered)
+                            .buttonBorderShape(.roundedRectangle)
+                            .foregroundColor(.cyan)
+                            .padding()
                         
-                        Button("Use Current Location") {
-                            locationManager.requestLocation()
-                            print("preessed")
+                        Text("Enter Location")
+                        TextField("Placeholder", text: $userLocation)
+                            .textFieldStyle(.roundedBorder)
+                        NavigationLink(destination: LoadingLocationView(locationManager:  locationManager, currentLocation: false)) {
+                            Text("Go")
                         }
                         
-                        .buttonStyle(.bordered)
-                        .buttonBorderShape(.roundedRectangle)
-                        .foregroundColor(.cyan)
-                    }
-                    }
+                        }
+//                    }
+//                }
                 }
+            
                 .tabItem {
                     Image(systemName: "mappin.circle.fill")
                     Text("Words")
@@ -56,10 +61,10 @@ struct ContentView: View {
                     
                 }
             
-        
-
         }
+        
     }
+        
 }
 
 
