@@ -11,7 +11,10 @@ If you would like to contribute or contact me regarding the project please get i
 
 List of future updates: 
 
- - Map View to the Places View
  - Text field instead of using current location
  - Add other fields to Places View, such as open times
  - Nearby parking? 
+ - Button to open Map for directions to places
+ - Add marker for location on map.
+ - add functionality to see what keywords are popular in your area
+ - Option to update whether you have visited locaiton
