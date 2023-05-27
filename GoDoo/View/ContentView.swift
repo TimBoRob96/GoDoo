@@ -16,33 +16,48 @@ struct ContentView: View {
     @StateObject var locationManager = LocationManager()
     
     var body: some View {
-        
-        NavigationView {
+        TabView {
             
-            if locationManager.requestedLocation {
-                LoadingLocationView(locationManager: locationManager)
+            NavigationView {
                 
-                if locationManager.hasFinishedLoading {
+                if locationManager.requestedLocation {
+                    LoadingLocationView(locationManager: locationManager)
                     
-                    KeywordListView(locationManager: locationManager)
-                }
-                
-            } else {
-                VStack {
-                    Image("Godoo")
-                        .padding()
-                    
-                    Button("Use Current Location") {
-                        locationManager.requestLocation()
-                        print("preessed")
+                    if locationManager.hasFinishedLoading {
+                        
+                        KeywordListView(locationManager: locationManager)
                     }
                     
-                    .buttonStyle(.bordered)
-                    .buttonBorderShape(.roundedRectangle)
-                    .foregroundColor(.cyan)
+                } else {
+                    VStack {
+                        Image("Godoo")
+                            .padding()
+                        
+                        Button("Use Current Location") {
+                            locationManager.requestLocation()
+                            print("preessed")
+                        }
+                        
+                        .buttonStyle(.bordered)
+                        .buttonBorderShape(.roundedRectangle)
+                        .foregroundColor(.cyan)
+                    }
+                    }
+                }
+                .tabItem {
+                    Image(systemName: "mappin.circle.fill")
+                    Text("Words")
+                }
+            
+            FavouritePlacesView()
+                .tabItem {
+                    Image(systemName: "heart.fill")
+                    Text("Favourites")
                     
                 }
-            }
+            
+        
+
         }
     }
 }

@@ -15,6 +15,7 @@ import MapKit
 struct PlaceView: View {
     
     let place: Place
+    var favouriteManager = FavouritePlaces()
     
     @State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
     
@@ -37,9 +38,14 @@ struct PlaceView: View {
             Map(coordinateRegion: $region)
                 .frame(width: 300, height: 300)
                 .padding()
-            Button("Go!") {
+            Button("Favourite") {
                 //region.center = CLLocationCoordinate2D(latitude: place.latComp, longitude: place.lonComp)
                 region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: place.latComp, longitude: place.lonComp), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+
+                let newFavourite = Favourite(name: place.placeName, id: place.id)
+                favouriteManager.favourites.append(newFavourite)
+                favouriteManager.saveFavourites()
+                
             }
             .buttonStyle(.borderedProminent)
             
@@ -47,6 +53,7 @@ struct PlaceView: View {
         .onAppear {
             //region =
             region.center = CLLocationCoordinate2D(latitude: place.latComp, longitude: place.lonComp)
+            favouriteManager.loadFavourites()
         }
         
     }

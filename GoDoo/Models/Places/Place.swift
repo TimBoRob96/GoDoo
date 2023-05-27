@@ -28,6 +28,8 @@ struct Place: Identifiable {
     
     
     
+    
+    
     func getLocation(latitude: CLLocationDegrees, longitude: CLLocationDegrees) -> String {
         let location = CLLocation(latitude: latitude, longitude: longitude)
         
