@@ -26,7 +26,7 @@ struct PlaceView: View {
             return "No Rating"
         }
     }
-
+    
     var body: some View {
         VStack {
             Text(place.placeName)
@@ -53,14 +53,14 @@ struct PlaceView: View {
                     favouriteManager.saveFavourites()
                 }
                 
-
+                
                 
             }
             .buttonStyle(.borderedProminent)
             
         }
         .onAppear {
-            //region =
+            
             region.center = CLLocationCoordinate2D(latitude: place.latComp, longitude: place.lonComp)
             favouriteManager.loadFavourites()
         }

@@ -14,30 +14,29 @@ import SwiftUI
 struct LoadingLocationView: View {
     
     @ObservedObject var locationManager: LocationManager
-    
     let currentLocation: Bool
+    let userEnteredLocation: String?
+    
     
     var body: some View {
         
-        if locationManager.hasFinishedLoading {
-            KeywordListView(locationManager: locationManager)
-
-        }   else {
-            VStack {
-                Text("Finding your location...")
-                ProgressView()
-                
-            }
-            .onAppear {
-                if currentLocation {
-                    locationManager.requestLocation()
-                }
-                
-
-            }
+        VStack {
+            Text("Finding your location...")
+            ProgressView()
             
         }
-
+        .onAppear {
+            if currentLocation {
+                locationManager.requestLocation()
+                
+            }
+            
+            else {
+                print("usergeneratedlocation")
+                locationManager.getCoordinate(addressString: userEnteredLocation ?? "Africa")
+            }
+        }
+        
     }
 }
 

@@ -23,10 +23,10 @@ struct FavouritePlacesView: View {
             
         }
         
-            .onAppear {
-                favouriteManager.loadFavourites()
-
-            }
+        .onAppear {
+            favouriteManager.loadFavourites()
+            
+        }
     }
 }
 

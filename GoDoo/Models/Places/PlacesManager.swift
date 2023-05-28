@@ -25,7 +25,7 @@ class PlacesManager: ObservableObject{
         let radius = Int(round(sliderRadius * 1000))
         
         let urlString = "\(placesURL)location=\(latitude),\(longitude)&radius=\(radius)&key=\(apiKey)&keyword=\(keyword)"
-        print(urlString)
+        //print(urlString)
         performRequest(with: urlString)
     }
     

@@ -25,11 +25,9 @@ struct ContentView: View {
                     VStack {
                         Image("Godoo")
                             .padding()
-                        NavigationLink(destination: LoadingLocationView(locationManager: locationManager, currentLocation: true)) {
-//                            Button("Use Current Location") {
+                        NavigationLink(destination: KeywordListView(locationManager: locationManager, userEnteredLocation: nil, currentLocation: true)) {
                                 Text("Use Current Location")
-                                //locationManager.requestLocation()
-//                                print("preessed")
+
                             }
                             
                             .buttonStyle(.bordered)
@@ -40,13 +38,17 @@ struct ContentView: View {
                         Text("Enter Location")
                         TextField("Placeholder", text: $userLocation)
                             .textFieldStyle(.roundedBorder)
-                        NavigationLink(destination: LoadingLocationView(locationManager:  locationManager, currentLocation: false)) {
+                        NavigationLink(destination: KeywordListView(locationManager:  locationManager, userEnteredLocation: userLocation, currentLocation: false)) {
                             Text("Go")
                         }
                         
                         }
-//                    }
-//                }
+                    .onAppear {
+                        locationManager.hasFinishedLoading = false
+                        locationManager.requestedLocation = false
+                        userLocation = ""
+                    }
+
                 }
             
                 .tabItem {

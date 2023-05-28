@@ -88,8 +88,8 @@
 			isa = PBXGroup;
 			children = (
 				902942A52A18D93300488705 /* K.swift */,
-				90F5E96F2A18C4470062CC8B /* Places */,
 				90F5E9742A18C4470062CC8B /* LocationManager.swift */,
+				90F5E96F2A18C4470062CC8B /* Places */,
 			);
 			path = Models;
 			sourceTree = "<group>";

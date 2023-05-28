@@ -19,23 +19,37 @@ struct KeywordListView: View {
     
     @State private var newKeyword: String = ""
     @State var sliderValue: Float = 5
-  
+    
+    let userEnteredLocation: String?
+    
+    //    @State var placemark: CLPlacemark?
+    
+    let currentLocation: Bool
+    
+    
+    
     
     
     var body: some View {
         
-       // NavigationView {
-
+        // NavigationView {
+        
+        if locationManager.hasFinishedLoading {
+            
             VStack {
                 
                 Text("Look at these spots!")
                     .padding()
+                Text(locationManager.placemark?.name ?? "x")
                 TextField("Placeholder", text: $newKeyword)
                     .padding()
                 Button("Add PlaceWord") {
-                    keywordManager.keywords.append(Keyword(text: newKeyword, id: "keyword\(newKeyword)"))
-                    keywordManager.saveKeywords()
-                    newKeyword = ""
+                    
+                    if newKeyword.count > 1 {
+                        keywordManager.keywords.append(Keyword(text: newKeyword, id: "keyword\(newKeyword)"))
+                        keywordManager.saveKeywords()
+                        newKeyword = ""
+                    }
                 }
                 .buttonStyle(.borderedProminent)
                 Text(String(format: "%.1f", sliderValue) + "km")
@@ -62,10 +76,17 @@ struct KeywordListView: View {
                 }
             }.onAppear {
                 keywordManager.loadKeywords()
+                locationManager.lookUpCurrentLocation()
 
+                
+
+                
             }
-            
-      //  }
+        }
+        else {
+            LoadingLocationView(locationManager: locationManager, currentLocation: currentLocation, userEnteredLocation: userEnteredLocation)
+
+        }
         
     }
 }
