@@ -19,6 +19,10 @@ struct FavouritePlacesView: View {
             List { ForEach(favouriteManager.favourites) { favourite in
                 Text(favourite.name)
             }
+            .onDelete { indexSet in
+                favouriteManager.favourites.remove(atOffsets: indexSet)
+                favouriteManager.saveFavourites()
+            }
             }
             
         }
