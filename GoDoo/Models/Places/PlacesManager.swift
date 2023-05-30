@@ -17,14 +17,20 @@ class PlacesManager: ObservableObject{
     
     @Published var placesList = [Place]()
     
-    let placesURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
+    @Published var favouritePlace: Place?
+    
+    //let placesURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
+    let placesURL = "https://maps.googleapis.com/maps/api/place/"
     let apiKey = K.apiKey
     
     func fetchPlaces(keyword: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees, sliderRadius: Float) {
         
         let radius = Int(round(sliderRadius * 1000))
+        let nearBy = "nearbysearch"
         
-        let urlString = "\(placesURL)location=\(latitude),\(longitude)&radius=\(radius)&key=\(apiKey)&keyword=\(keyword)"
+        let nearByURL = placesURL + nearBy
+        
+        let urlString = "\(nearByURL)/json?location=\(latitude),\(longitude)&radius=\(radius)&key=\(apiKey)&keyword=\(keyword)"
         //print(urlString)
         performRequest(with: urlString)
     }
@@ -45,13 +51,14 @@ class PlacesManager: ObservableObject{
                 }
                 
                 if let safeData = data {
-                    
-                    if let places = self.parseJson(safeData) {
-                        
-                        DispatchQueue.main.async {
-                            self.placesList = places
+
+                        if let places = self.parsePlacesJson(safeData) {
+                            
+                            DispatchQueue.main.async {
+                                self.placesList = places
+                            }
                         }
-                    }
+
                 }
             }
             task.resume()
@@ -61,7 +68,7 @@ class PlacesManager: ObservableObject{
     
     //When the session has retrieved the JSON data it is decoded using this method
     
-    func parseJson(_ placesData: Data) -> [Place]? {
+    func parsePlacesJson(_ placesData: Data) -> [Place]? {
         
         let decoder = JSONDecoder()
         
@@ -95,5 +102,86 @@ class PlacesManager: ObservableObject{
     }
     
 
+    
+}
+
+//MARK: - Place Details
+
+extension PlacesManager {
+    
+    func fetchPlaceDetails(place_id: String) {
+        
+        let details = "details"
+        
+        let detailsURL = placesURL + details
+        
+        let urlString = "\(detailsURL)/json?place_id=\(place_id)&key=\(apiKey)"
+        //print(urlString)
+        
+        
+        performDetailsRequest(with: urlString)
+        
+        //return place!
+    }
+    
+    func performDetailsRequest(with urlString: String) {
+        
+
+        if let url = URL(string: urlString) {
+            
+            
+            let session = URLSession(configuration: .default)
+            
+            let task = session.dataTask(with: url) { data, response, error in
+                if error != nil {
+                    
+                    print(error!)
+                    
+                }
+                
+                if let safeData = data {
+                    
+                        if let place = self.parseDetailsJson(safeData) {
+                            self.favouritePlace = place
+                            //completionHandler(place) = place
+                            //print(place)
+                            //How to get this to return the place!!
+                        }
+                }
+            }
+
+            task.resume()
+
+        }
+
+        
+    }
+    
+    func parseDetailsJson(_ placeData: Data) -> Place? {
+        
+        let decoder = JSONDecoder()
+        
+        do {
+            let decodedData = try decoder.decode(PlaceData.self, from: placeData)
+            let result = decodedData.result
+                
+                let name = result.name
+                let id = result.place_id
+                let rating = result.rating
+                let lat = result.geometry.location.lat
+                let lon = result.geometry.location.lng
+                let place = Place(id: id, placeName: name, rating: rating, lat: lat, lon: lon)
+                
+                return place
+
+            
+        } catch {
+            
+            print(error)
+            return nil
+        }
+        
+        
+    }
     
 }

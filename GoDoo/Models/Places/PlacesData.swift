@@ -15,6 +15,10 @@ struct PlacesData: Decodable {
     
 }
 
+struct PlaceData: Decodable {
+    let result: Result
+}
+
 struct Result: Decodable {
     
     let name: String

@@ -69,6 +69,37 @@ struct PlaceView: View {
     
 }
 
+struct favouritePlaceView: View {
+    
+    @ObservedObject var placesManager: PlacesManager
+    
+    let place_id: String
+    var body: some View {
+        
+        if placesManager.favouritePlace != nil {
+            if placesManager.favouritePlace?.id == place_id {
+                PlaceView(place: placesManager.favouritePlace!)
+            }
+            else {
+                ProgressView()
+                    .onAppear {
+                        placesManager.favouritePlace = nil
+                    }
+            }
+
+        } else {
+            ProgressView()
+                .onAppear {
+                    placesManager.fetchPlaceDetails(place_id: place_id)
+        }
+        
+
+
+            }
+    }
+    
+}
+
 
 
 
