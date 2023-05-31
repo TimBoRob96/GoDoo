@@ -32,7 +32,7 @@ struct ContentView: View {
                         NavigationLink(destination: KeywordListView(locationManager: locationManager, userEnteredLocation: nil, currentLocation: true)) {
                                 Text("Use Current Location")
 
-                            }
+                        }
                             
                             .buttonStyle(.bordered)
                             .buttonBorderShape(.roundedRectangle)
@@ -55,6 +55,7 @@ struct ContentView: View {
                         locationManager.hasFinishedLoading = false
                         locationManager.requestedLocation = false
                         userLocation = ""
+
                     }
 
                 }

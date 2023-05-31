@@ -86,7 +86,7 @@ struct KeywordListView: View {
                 
             }
             VStack {
-                Text(locationManager.placemark?.name ?? "Current location")
+                Text(locationManager.placemark?.subLocality ?? "Current location")
                 Text(String(format: "%.1f", sliderValue) + "km")
                 Slider(value: $sliderValue, in: 0.1...10)
                     .padding()
