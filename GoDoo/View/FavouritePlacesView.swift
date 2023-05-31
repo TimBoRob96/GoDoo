@@ -14,7 +14,7 @@ struct FavouritePlacesView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Text("FAVOURITE PLACES")
+                Text("GoDoo! Again")
                     .font(.largeTitle)
                 
                 List { ForEach(favouriteManager.favourites) { favourite in

@@ -97,6 +97,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                 if error == nil {
                     let firstLocation = placemarks?[0]
                     self.placemark = firstLocation
+                    print(placemarks)
                     
                 }
                 else {

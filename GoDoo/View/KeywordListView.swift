@@ -37,24 +37,24 @@ struct KeywordListView: View {
         if locationManager.hasFinishedLoading {
             
             VStack {
+
+
                 
-                Text("Look at these spots!")
-                    .padding()
-                Text(locationManager.placemark?.name ?? "x")
-                TextField("Placeholder", text: $newKeyword)
-                    .padding()
-                Button("Add PlaceWord") {
-                    
-                    if newKeyword.count > 1 {
-                        keywordManager.keywords.append(Keyword(text: newKeyword, id: "keyword\(newKeyword)"))
-                        keywordManager.saveKeywords()
-                        newKeyword = ""
+                HStack {
+                    TextField("Enter a new GoDoo! KeyWord", text: $newKeyword)
+                        .padding()
+                    Button("Add") {
+                        
+                        if newKeyword.count > 1 {
+                            keywordManager.keywords.append(Keyword(text: newKeyword, id: "keyword\(newKeyword)"))
+                            keywordManager.saveKeywords()
+                            newKeyword = ""
+                        }
                     }
+                    .buttonStyle(.borderedProminent)
                 }
-                .buttonStyle(.borderedProminent)
-                Text(String(format: "%.1f", sliderValue) + "km")
-                Slider(value: $sliderValue, in: 0.1...10)
-                    .padding()
+
+
                 
                 //MARK: - List View for Keywords
                 
@@ -68,10 +68,13 @@ struct KeywordListView: View {
                     
                 }
                     
+                    
+                    
                 .onDelete { indexSet in
                     keywordManager.keywords.remove(atOffsets: indexSet)
                     keywordManager.saveKeywords()
                 }
+
                     
                 }
             }.onAppear {
@@ -82,6 +85,13 @@ struct KeywordListView: View {
 
                 
             }
+            VStack {
+                Text(locationManager.placemark?.name ?? "Current location")
+                Text(String(format: "%.1f", sliderValue) + "km")
+                Slider(value: $sliderValue, in: 0.1...10)
+                    .padding()
+            }
+            .background(.teal)
         }
         else {
             LoadingLocationView(locationManager: locationManager, currentLocation: currentLocation, userEnteredLocation: userEnteredLocation)

@@ -24,7 +24,11 @@ struct ContentView: View {
 
                     VStack {
                         Image("Godoo")
-                            .padding()
+                            .resizable()
+                            .frame(width: 300,height: 300)
+                            .padding(.vertical)
+                            
+
                         NavigationLink(destination: KeywordListView(locationManager: locationManager, userEnteredLocation: nil, currentLocation: true)) {
                                 Text("Use Current Location")
 
@@ -35,12 +39,16 @@ struct ContentView: View {
                             .foregroundColor(.cyan)
                             .padding()
                         
-                        Text("Enter Location")
-                        TextField("Placeholder", text: $userLocation)
-                            .textFieldStyle(.roundedBorder)
-                        NavigationLink(destination: KeywordListView(locationManager:  locationManager, userEnteredLocation: userLocation, currentLocation: false)) {
-                            Text("Go")
+
+                        HStack {
+                            
+                            TextField("Enter a location", text: $userLocation)
+                                .textFieldStyle(.roundedBorder)
+                            NavigationLink(destination: KeywordListView(locationManager:  locationManager, userEnteredLocation: userLocation, currentLocation: false)) {
+                                Text("Go")
+                            } .buttonStyle(.borderedProminent)
                         }
+                        .padding(.horizontal)
                         
                         }
                     .onAppear {
@@ -53,17 +61,18 @@ struct ContentView: View {
             
                 .tabItem {
                     Image(systemName: "mappin.circle.fill")
-                    Text("Words")
+                    Text("GoDoo!")
                 }
             
             FavouritePlacesView()
                 .tabItem {
                     Image(systemName: "heart.fill")
-                    Text("Favourites")
+                    Text("Saved Places")
                     
                 }
-            
+
         }
+
         
     }
         
