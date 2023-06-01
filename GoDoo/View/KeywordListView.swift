@@ -25,11 +25,7 @@ struct KeywordListView: View {
     //    @State var placemark: CLPlacemark?
     
     let currentLocation: Bool
-    
-    
-    
-    
-    
+
     var body: some View {
         
         // NavigationView {
@@ -38,8 +34,6 @@ struct KeywordListView: View {
             
             VStack {
 
-
-                
                 HStack {
                     TextField("Enter a new GoDoo! KeyWord", text: $newKeyword)
                         .padding()
@@ -54,8 +48,6 @@ struct KeywordListView: View {
                     .buttonStyle(.borderedProminent)
                 }
 
-
-                
                 //MARK: - List View for Keywords
                 
                 List { ForEach(keywordManager.keywords) { keyword in
@@ -64,12 +56,7 @@ struct KeywordListView: View {
                         Text(keyword.text)
                         
                     }
-                    
-                    
                 }
-                    
-                    
-                    
                 .onDelete { indexSet in
                     keywordManager.keywords.remove(atOffsets: indexSet)
                     keywordManager.saveKeywords()
@@ -81,12 +68,9 @@ struct KeywordListView: View {
                 keywordManager.loadKeywords()
                 locationManager.lookUpCurrentLocation()
 
-                
-
-                
             }
             VStack {
-                Text(locationManager.placemark?.subLocality ?? "Current location")
+                Text(locationManager.placemark?.subLocality ?? locationManager.placemark?.name ?? "Current location")
                 Text(String(format: "%.1f", sliderValue) + "km")
                 Slider(value: $sliderValue, in: 0.1...10)
                     .padding()
