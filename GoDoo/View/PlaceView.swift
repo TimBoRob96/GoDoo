@@ -34,7 +34,6 @@ struct PlaceView: View {
             Text(rating)
                 .font(.headline)
             
-            
             Map(coordinateRegion: $region)
                 .frame(width: 300, height: 300)
                 .padding()
@@ -46,27 +45,18 @@ struct PlaceView: View {
                     print("already favourited")
                 } else {
                     let newFavourite = Favourite(name: place.placeName, id: place.id)
-                    
-                    
-                    
                     favouriteManager.favourites.append(newFavourite)
                     favouriteManager.saveFavourites()
                 }
-                
-                
-                
             }
             .buttonStyle(.borderedProminent)
-            
         }
         .onAppear {
             
             region.center = CLLocationCoordinate2D(latitude: place.latComp, longitude: place.lonComp)
             favouriteManager.loadFavourites()
         }
-        
     }
-    
 }
 
 struct favouritePlaceView: View {
@@ -86,16 +76,13 @@ struct favouritePlaceView: View {
                         placesManager.favouritePlace = nil
                     }
             }
-
+            
         } else {
             ProgressView()
                 .onAppear {
                     placesManager.fetchPlaceDetails(place_id: place_id)
+                }
         }
-        
-
-
-            }
     }
     
 }

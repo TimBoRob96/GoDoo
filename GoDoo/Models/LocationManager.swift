@@ -80,8 +80,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         default:
             break
         }
-        
-        
     }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
@@ -97,18 +95,17 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                 if error == nil {
                     let firstLocation = placemarks?[0]
                     self.placemark = firstLocation
-                    print(placemarks)
                     
                 }
                 else {
                     // An error occurred during geocoding.
-                    //print("geocoding")
+                    print("geocoding error: \(error!.localizedDescription)")
                 }
             }
             )
         }
         else {
-            //print("No location")
+            print("No location provided for lookup")
         }
     }
     
@@ -130,12 +127,11 @@ extension LocationManager {
                     self.lon = location.coordinate.longitude
                     self.located = location
                     self.hasFinishedLoading = true
-
                     return
                 }
+            } else {
+                print("error getting co-ordinates \(error!.localizedDescription)")
             }
-            print(error)
-            
             //completionHandler(kCLLocationCoordinate2DInvalid, error as NSError?)
         }
     }

@@ -19,22 +19,17 @@ struct FavouritePlacesView: View {
                 
                 List { ForEach(favouriteManager.favourites) { favourite in
                     NavigationLink(favourite.name, destination: favouritePlaceView(placesManager: placesManager, place_id: favourite.id))
-                    
-                    //Text(favourite.name)
                 }
                 .onDelete { indexSet in
                     favouriteManager.favourites.remove(atOffsets: indexSet)
                     favouriteManager.saveFavourites()
                 }
                 }
-                
             }
         }
-        
         .onAppear {
             favouriteManager.loadFavourites()
             placesManager.favouritePlace = nil
-            
         }
     }
 }

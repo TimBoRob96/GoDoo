@@ -17,7 +17,6 @@ struct LoadingLocationView: View {
     let currentLocation: Bool
     let userEnteredLocation: String?
     
-    
     var body: some View {
         
         VStack {

@@ -21,62 +21,47 @@ struct ContentView: View {
             
             NavigationView {
                 
-
-                    VStack {
-                        Image("Godoo")
-                            .resizable()
-                            .frame(width: 300,height: 300)
-                            .padding(.vertical)
-                            
-
-                        NavigationLink(destination: KeywordListView(locationManager: locationManager, userEnteredLocation: nil, currentLocation: true)) {
-                                Text("Use Current Location")
-
-                        }
-                            
-                            .buttonStyle(.bordered)
-                            .buttonBorderShape(.roundedRectangle)
-                            .foregroundColor(.cyan)
-                            .padding()
-                        
-
-                        HStack {
-                            
-                            TextField("Enter a location", text: $userLocation)
-                                .textFieldStyle(.roundedBorder)
-                            NavigationLink(destination: KeywordListView(locationManager:  locationManager, userEnteredLocation: userLocation, currentLocation: false)) {
-                                Text("Go")
-                            } .buttonStyle(.borderedProminent)
-                        }
-                        .padding(.horizontal)
-                        
-                        }
-                    .onAppear {
-                        locationManager.hasFinishedLoading = false
-                        locationManager.requestedLocation = false
-                        userLocation = ""
-
+                VStack {
+                    Image("Godoo")
+                        .resizable()
+                        .frame(width: 300,height: 300)
+                        .padding(.vertical)
+                    
+                    NavigationLink(destination: KeywordListView(locationManager: locationManager, userEnteredLocation: nil, currentLocation: true)) {
+                        Text("Use Current Location")
                     }
-
+                    .buttonStyle(.bordered)
+                    .buttonBorderShape(.roundedRectangle)
+                    .foregroundColor(.cyan)
+                    .padding()
+                    
+                    HStack {
+                        TextField("Enter a location", text: $userLocation)
+                            .textFieldStyle(.roundedBorder)
+                        NavigationLink(destination: KeywordListView(locationManager:  locationManager, userEnteredLocation: userLocation, currentLocation: false)) {
+                            Text("Go")
+                        } .buttonStyle(.borderedProminent)
+                    }
+                    .padding(.horizontal)
                 }
-            
-                .tabItem {
-                    Image(systemName: "mappin.circle.fill")
-                    Text("GoDoo!")
+                .onAppear {
+                    locationManager.hasFinishedLoading = false
+                    locationManager.requestedLocation = false
+                    userLocation = ""
                 }
-            
+            }
+            //MARK: - Tab menu at bottom of screen
+            .tabItem {
+                Image(systemName: "mappin.circle.fill")
+                Text("GoDoo!")
+            }
             FavouritePlacesView()
                 .tabItem {
                     Image(systemName: "heart.fill")
                     Text("Saved Places")
-                    
                 }
-
         }
-
-        
     }
-        
 }
 
 
