@@ -14,11 +14,21 @@ class PlacesManager: ObservableObject{
     
     var hasFinishedLoading: Bool = false
     @Published var placesList = [Place]()
+    @Published var randomPlace: Place?
     @Published var favouritePlace: Place?
     
     //let placesURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
     let placesURL = "https://maps.googleapis.com/maps/api/place/"
     let apiKey = K.apiKey
+    
+    func selectRandomPlace(places: [Place]) {
+        
+        if placesList.count > 1 {
+            let randomNumber = Int.random(in: 0...places.count-1)
+            randomPlace = places[randomNumber]
+        }
+
+    }
     
     func fetchPlaces(keyword: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees, sliderRadius: Float) {
         let radius = Int(round(sliderRadius * 1000))
@@ -42,6 +52,7 @@ class PlacesManager: ObservableObject{
                     if let places = self.parsePlacesJson(safeData) {
                         DispatchQueue.main.async {
                             self.placesList = places
+                            self.selectRandomPlace(places: places)
                         }
                     }
                 }
@@ -73,6 +84,7 @@ class PlacesManager: ObservableObject{
             return nil
         }
     }
+    
 }
 
 //MARK: - Place Details

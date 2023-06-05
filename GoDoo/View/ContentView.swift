@@ -48,6 +48,8 @@ struct ContentView: View {
                     locationManager.hasFinishedLoading = false
                     locationManager.requestedLocation = false
                     userLocation = ""
+                    locationManager.resetLocation()
+                    print("cont")
                 }
             }
             //MARK: - Tab menu at bottom of screen

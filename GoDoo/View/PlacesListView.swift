@@ -13,7 +13,7 @@ import MapKit
 
 struct PlacesListView: View {
     
-    @ObservedObject var placesManager = PlacesManager()
+    @StateObject var placesManager = PlacesManager()
     
     
     let keyword: String
@@ -21,27 +21,52 @@ struct PlacesListView: View {
     let lon: CLLocationDegrees
     let sliderRadius: Float
     
+    //@State var randomPlace: Place?
     
     var body: some View {
+        
+        VStack {
+            Spacer()
 
-            
-            List(placesManager.placesList) { place in
-                VStack {
+            List(
+                
+                
+                placesManager.placesList) { place in
                     
-                    HStack {
-                        NavigationLink(place.placeName, destination: PlaceView(place: place))
-
-                        Text(place.getLocation(latitude: lat, longitude: lon) + "km")
-                        
+                    
+                    VStack {
+                        HStack {
+                            NavigationLink(place.placeName, destination: PlaceView(place: place))
+                            Text(place.getLocation(latitude: lat, longitude: lon) + "km")
+                        }
                     }
                 }
+                .onAppear{ print(placesManager.placesList.count) }
+            Text("GoDoo Found \(placesManager.placesList.count) places!")
+            if placesManager.randomPlace != nil {
+                NavigationLink("Let GoDoo Choose!", destination: PlaceView(place: placesManager.randomPlace!))
+                    .buttonStyle(.borderedProminent)
+                Spacer()
             }
-
+        }
         .onAppear {
             
-            placesManager.fetchPlaces(keyword: keyword, latitude: lat, longitude: lon, sliderRadius: sliderRadius)
             
+            if placesManager.placesList.count < 1 {
+                placesManager.fetchPlaces(keyword: keyword, latitude: lat, longitude: lon, sliderRadius: sliderRadius)
+            } else {
+                placesManager.selectRandomPlace(places: placesManager.placesList)
+            }
+
         }
+//        .onChange(of: placesManager.placesList.count) { newValue in
+//            if newValue > 0 {
+//                print(newValue)
+//                //randomPlace = placesManager.selectRandomPlace()
+//            }
+//
+//        }
+
         .navigationBarTitle(keyword)
     }
     

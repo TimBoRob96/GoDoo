@@ -63,10 +63,10 @@ struct KeywordListView: View {
                 }
                 }
             }.onAppear {
-                keywordManager.loadKeywords()
                 locationManager.lookUpCurrentLocation()
-                
+                keywordManager.loadKeywords()
             }
+
             VStack {
                 Text(locationManager.placemark?.subLocality ?? locationManager.placemark?.name ?? "Current location")
                 Text(String(format: "%.1f", sliderValue) + "km")
@@ -86,3 +86,4 @@ struct KeywordListView: View {
 //        KeywordListView(locationManager: LocationManager(), keywordManager: KeywordManager(), newKeyword: "")
 //    }
 //}
+

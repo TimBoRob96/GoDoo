@@ -37,6 +37,15 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     //Location is requested here
     
+    func resetLocation() {
+        located = nil
+        lat = nil
+        lon = nil
+        placemark = nil
+        
+    
+    }
+    
     func requestLocation() {
         requestedLocation = true
         manager.requestLocation()

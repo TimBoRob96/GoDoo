@@ -32,7 +32,7 @@ struct LoadingLocationView: View {
             
             else {
                 print("usergeneratedlocation")
-                locationManager.getCoordinate(addressString: userEnteredLocation ?? "Africa")
+                locationManager.getCoordinate(addressString: userEnteredLocation ?? "Swansea")
             }
         }
         
