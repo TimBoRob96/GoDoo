@@ -26,6 +26,10 @@ struct Place: Identifiable {
         return CLLocationDegrees(lon)
     }
     
+    var coordinate: CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(latitude: latComp, longitude: lonComp)
+    }
+    
     
     func getLocation(latitude: CLLocationDegrees, longitude: CLLocationDegrees) -> String {
         let location = CLLocation(latitude: latitude, longitude: longitude)

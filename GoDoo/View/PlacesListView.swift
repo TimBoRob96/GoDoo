@@ -26,6 +26,9 @@ struct PlacesListView: View {
     var body: some View {
         
         VStack {
+            
+            NavigationLink("GoDoo Map", destination: PlaceListMapView(placesManager: placesManager))
+            
             Spacer()
 
             List(

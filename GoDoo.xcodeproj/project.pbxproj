@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		902942A62A18D93300488705 /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902942A52A18D93300488705 /* K.swift */; };
+		907DCDBD2A2FC02C0092BA37 /* PlaceListMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907DCDBC2A2FC02C0092BA37 /* PlaceListMapView.swift */; };
 		90A698282A21F6D4007519E5 /* FavouritePlacesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A698272A21F6D4007519E5 /* FavouritePlacesView.swift */; };
 		90A6982A2A21F766007519E5 /* FavouritePlaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A698292A21F766007519E5 /* FavouritePlaces.swift */; };
 		90F548662A1BEA8B0042FA0F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 90F548652A1BEA8B0042FA0F /* README.md */; };
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		902942A52A18D93300488705 /* K.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = K.swift; path = GoDoo/K.swift; sourceTree = SOURCE_ROOT; };
+		907DCDBC2A2FC02C0092BA37 /* PlaceListMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListMapView.swift; sourceTree = "<group>"; };
 		90A698272A21F6D4007519E5 /* FavouritePlacesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritePlacesView.swift; sourceTree = "<group>"; };
 		90A698292A21F766007519E5 /* FavouritePlaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritePlaces.swift; sourceTree = "<group>"; };
 		90F548652A1BEA8B0042FA0F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				90F5E98A2A18C9F80062CC8B /* KeywordListView.swift */,
 				90F5E98B2A18C9F80062CC8B /* LoadingView.swift */,
 				90F5E98D2A18C9F80062CC8B /* PlacesListView.swift */,
+				907DCDBC2A2FC02C0092BA37 /* PlaceListMapView.swift */,
 				90F5E98E2A18C9F80062CC8B /* PlaceView.swift */,
 				90A698272A21F6D4007519E5 /* FavouritePlacesView.swift */,
 			);
@@ -203,6 +206,7 @@
 				90F5E97F2A18C4470062CC8B /* Place.swift in Sources */,
 				90F5E9552A18C4040062CC8B /* GoDooApp.swift in Sources */,
 				90F5E9912A18C9F80062CC8B /* LoadingView.swift in Sources */,
+				907DCDBD2A2FC02C0092BA37 /* PlaceListMapView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -34,9 +34,14 @@ struct PlaceView: View {
             Text(rating)
                 .font(.headline)
             
-            Map(coordinateRegion: $region)
+            Map(coordinateRegion: $region, annotationItems: [place]) { placeMark in
+                MapMarker(coordinate: placeMark.coordinate)
+                
+            }
                 .frame(width: 300, height: 300)
-                .padding()
+                .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                .overlay(Circle().stroke(Color.black, lineWidth: 5))
+            
             Button("Favourite") {
                 //region.center = CLLocationCoordinate2D(latitude: place.latComp, longitude: place.lonComp)
                 region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: place.latComp, longitude: place.lonComp), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))

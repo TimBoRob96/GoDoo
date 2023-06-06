@@ -16,6 +16,8 @@ class PlacesManager: ObservableObject{
     @Published var placesList = [Place]()
     @Published var randomPlace: Place?
     @Published var favouritePlace: Place?
+    @Published var region: MKCoordinateRegion?
+    @Published var coordinate: CLLocationCoordinate2D?
     
     //let placesURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
     let placesURL = "https://maps.googleapis.com/maps/api/place/"
@@ -35,8 +37,17 @@ class PlacesManager: ObservableObject{
         let nearBy = "nearbysearch"
         let nearByURL = placesURL + nearBy
         let urlString = "\(nearByURL)/json?location=\(latitude),\(longitude)&radius=\(radius)&key=\(apiKey)&keyword=\(keyword)"
+        
+        let radiusDelta = Double(radius)/110.0
+        
+        region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), span: MKCoordinateSpan(latitudeDelta: radiusDelta, longitudeDelta: radiusDelta))
+        
+        coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        
         //print(urlString)
         performRequest(with: urlString)
+        
+        
     }
     
     //Starts the URL Session and performs the api request.
