@@ -41,20 +41,30 @@ struct PlaceView: View {
                 .frame(width: 300, height: 300)
                 .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                 .overlay(Circle().stroke(Color.black, lineWidth: 5))
-            
-            Button("Favourite") {
-                //region.center = CLLocationCoordinate2D(latitude: place.latComp, longitude: place.lonComp)
-                region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: place.latComp, longitude: place.lonComp), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-                
-                if favouriteManager.favourites.contains(where: {favourite in favourite.id == place.id}) {
-                    print("already favourited")
-                } else {
-                    let newFavourite = Favourite(name: place.placeName, id: place.id)
-                    favouriteManager.favourites.append(newFavourite)
-                    favouriteManager.saveFavourites()
+            HStack{
+                Button("Directions") {
+                    let url = URL(string: "maps://?saddr=&daddr=\(place.latComp),\(place.lonComp)")
+                    if UIApplication.shared.canOpenURL(url!) {
+                          UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+                    }
                 }
+                .buttonStyle(.borderedProminent)
+                Button("Favourite") {
+                    //region.center = CLLocationCoordinate2D(latitude: place.latComp, longitude: place.lonComp)
+                    region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: place.latComp, longitude: place.lonComp), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+                    
+                    if favouriteManager.favourites.contains(where: {favourite in favourite.id == place.id}) {
+                        print("already favourited")
+                    } else {
+                        let newFavourite = Favourite(name: place.placeName, id: place.id)
+                        favouriteManager.favourites.append(newFavourite)
+                        favouriteManager.saveFavourites()
+                    }
+                }
+                .buttonStyle(.borderedProminent)
+                
+
             }
-            .buttonStyle(.borderedProminent)
         }
         .onAppear {
             

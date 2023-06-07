@@ -28,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		902942A52A18D93300488705 /* K.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = K.swift; path = GoDoo/K.swift; sourceTree = SOURCE_ROOT; };
+		907780FD2A30E989001991C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		907DCDBC2A2FC02C0092BA37 /* PlaceListMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListMapView.swift; sourceTree = "<group>"; };
 		90A698272A21F6D4007519E5 /* FavouritePlacesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritePlacesView.swift; sourceTree = "<group>"; };
 		90A698292A21F766007519E5 /* FavouritePlaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritePlaces.swift; sourceTree = "<group>"; };
@@ -78,6 +79,7 @@
 		90F5E9532A18C4040062CC8B /* GoDoo */ = {
 			isa = PBXGroup;
 			children = (
+				907780FD2A30E989001991C8 /* Info.plist */,
 				90F5E9892A18C9C50062CC8B /* View */,
 				90F5E96D2A18C4470062CC8B /* Models */,
 				90F5E9542A18C4040062CC8B /* GoDooApp.swift */,
@@ -338,6 +340,7 @@
 				DEVELOPMENT_TEAM = 4D3S2BJSGK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GoDoo/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Need your locations to find places near you!";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -368,6 +371,7 @@
 				DEVELOPMENT_TEAM = 4D3S2BJSGK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GoDoo/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Need your locations to find places near you!";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
