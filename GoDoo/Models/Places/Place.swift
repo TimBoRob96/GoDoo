@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreLocation
+import SwiftUI
 
 //Place datatype
 
@@ -15,8 +16,20 @@ struct Place: Identifiable {
     var id: String
     let placeName: String
     let rating: Double?
+    let open: Bool?
     let lat: Float
     let lon: Float
+    
+    var openColour: Color {
+        switch open {
+        case true:
+            return Color.green
+        case false:
+            return Color.red
+        default:
+            return Color.black
+        }
+    }
     
     
     var latComp: CLLocationDegrees {

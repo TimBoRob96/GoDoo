@@ -86,7 +86,8 @@ class PlacesManager: ObservableObject{
                 let rating = result.rating
                 let lat = result.geometry.location.lat
                 let lon = result.geometry.location.lng
-                let place = Place(id: id, placeName: name, rating: rating, lat: lat, lon: lon)
+                let open = result.opening_hours?.open_now
+                let place = Place(id: id, placeName: name, rating: rating, open: open, lat: lat, lon: lon)
                 places.append(place)
             }
             return places
@@ -138,7 +139,8 @@ extension PlacesManager {
             let rating = result.rating
             let lat = result.geometry.location.lat
             let lon = result.geometry.location.lng
-            let place = Place(id: id, placeName: name, rating: rating, lat: lat, lon: lon)
+            let open = result.opening_hours?.open_now
+            let place = Place(id: id, placeName: name, rating: rating, open: open, lat: lat, lon: lon)
             return place
         } catch {
             print(error)
