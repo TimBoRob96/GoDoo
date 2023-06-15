@@ -33,9 +33,7 @@ struct PlaceView: View {
                 .font(.largeTitle)
             Text(rating)
                 .font(.headline)
-            if place.open == true {
-                Text("Open Now")
-            }
+
             Map(coordinateRegion: $region, annotationItems: [place]) { placeMark in
                 MapMarker(coordinate: placeMark.coordinate)
                 
@@ -43,6 +41,9 @@ struct PlaceView: View {
                 .frame(width: 300, height: 300)
                 .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                 .overlay(Circle().stroke(place.openColour, lineWidth: 5))
+            if place.open != nil {
+                Text(place.open! ? "Open Now" : "Closed Right Now").foregroundColor(place.openColour)
+            }
             HStack{
                 Button("Directions") {
                     let url = URL(string: "maps://?saddr=&daddr=\(place.latComp),\(place.lonComp)")
