@@ -21,6 +21,7 @@ struct PlacesListView: View {
     let lon: CLLocationDegrees
     let sliderRadius: Float
     
+    
     //@State var randomPlace: Place?
     
     var body: some View {

@@ -44,7 +44,7 @@ class PlacesManager: ObservableObject{
         
         coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         
-        //print(urlString)
+        print(urlString)
         performRequest(with: urlString)
         
         
@@ -87,7 +87,8 @@ class PlacesManager: ObservableObject{
                 let lat = result.geometry.location.lat
                 let lon = result.geometry.location.lng
                 let open = result.opening_hours?.open_now
-                let place = Place(id: id, placeName: name, rating: rating, open: open, lat: lat, lon: lon)
+                let photoRef = result.photos?[0].photo_reference
+                let place = Place(id: id, placeName: name, rating: rating, open: open, photoRef: photoRef, lat: lat, lon: lon)
                 places.append(place)
             }
             return places
@@ -140,7 +141,9 @@ extension PlacesManager {
             let lat = result.geometry.location.lat
             let lon = result.geometry.location.lng
             let open = result.opening_hours?.open_now
-            let place = Place(id: id, placeName: name, rating: rating, open: open, lat: lat, lon: lon)
+            //let photos = result.photos
+            let photoRef = result.photos?[0].photo_reference
+            let place = Place(id: id, placeName: name, rating: rating, open: open, photoRef: photoRef, lat: lat, lon: lon)
             return place
         } catch {
             print(error)
@@ -148,3 +151,5 @@ extension PlacesManager {
         }
     }
 }
+
+

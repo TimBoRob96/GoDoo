@@ -16,8 +16,10 @@ struct PlaceView: View {
     
     let place: Place
     var favouriteManager = FavouritePlaces()
+    @ObservedObject var placeImageManager = PlaceImageManager()
     
     @State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
+
     
     var rating: String {
         if place.rating != nil {
@@ -33,17 +35,33 @@ struct PlaceView: View {
                 .font(.largeTitle)
             Text(rating)
                 .font(.headline)
-
-            Map(coordinateRegion: $region, annotationItems: [place]) { placeMark in
-                MapMarker(coordinate: placeMark.coordinate)
-                
-            }
-                .frame(width: 300, height: 300)
-                .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
-                .overlay(Circle().stroke(place.openColour, lineWidth: 5))
             if place.open != nil {
                 Text(place.open! ? "Open Now" : "Closed Right Now").foregroundColor(place.openColour)
             }
+            
+            ScrollView(.horizontal) {
+                HStack {
+                    Spacer(minLength: 100)
+                    
+                    Image(uiImage: placeImageManager.placeImage)
+                        .frame(width: 300,height: 300)
+                        .clipShape(Circle())
+                        .overlay(Circle().stroke(place.openColour, lineWidth: 5))
+                        
+                    Spacer(minLength: 200)
+                    
+                    Map(coordinateRegion: $region, annotationItems: [place]) { placeMark in
+                        MapMarker(coordinate: placeMark.coordinate)
+                        
+                    }
+                    .frame(width: 300, height: 300)
+                    .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                    .overlay(Circle().stroke(place.openColour, lineWidth: 5))
+                    Spacer(minLength: 100)
+
+                }
+            }
+            
             HStack{
                 Button("Directions") {
                     let url = URL(string: "maps://?saddr=&daddr=\(place.latComp),\(place.lonComp)")
@@ -73,6 +91,10 @@ struct PlaceView: View {
             
             region.center = CLLocationCoordinate2D(latitude: place.latComp, longitude: place.lonComp)
             favouriteManager.loadFavourites()
+            if place.photoRef != nil {
+                placeImageManager.getPlaceImage(imageID: place.photoRef!)
+            }
+
         }
     }
 }

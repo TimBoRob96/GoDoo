@@ -25,6 +25,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var hasFinishedLoading = false
     @Published var placemark: CLPlacemark?
     
+    
+    
     let geocoder = CLGeocoder()
     
     var userEnteredLocation: String?

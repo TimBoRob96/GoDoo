@@ -17,6 +17,9 @@ struct Place: Identifiable {
     let placeName: String
     let rating: Double?
     let open: Bool?
+    
+    let photoRef: String?
+    
     let lat: Float
     let lon: Float
     

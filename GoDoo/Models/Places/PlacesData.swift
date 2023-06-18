@@ -26,6 +26,7 @@ struct Result: Decodable {
     let rating: Double?
     let geometry: Geometry
     let opening_hours: Opening_Hours?
+    let photos: [Photos]?
     //let types: String
     //let type: String
 }
@@ -41,4 +42,8 @@ struct Location: Decodable {
 
 struct Opening_Hours: Decodable {
     let open_now: Bool
+}
+
+struct Photos: Decodable {
+    let photo_reference: String?
 }
