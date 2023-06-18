@@ -41,7 +41,7 @@ struct Location: Decodable {
 }
 
 struct Opening_Hours: Decodable {
-    let open_now: Bool
+    let open_now: Bool?
 }
 
 struct Photos: Decodable {
