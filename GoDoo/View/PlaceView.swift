@@ -15,11 +15,11 @@ import MapKit
 struct PlaceView: View {
     
     let place: Place
-    var favouriteManager = FavouritePlaces()
+    @ObservedObject var favouriteManager = FavouritePlaces()
     @ObservedObject var placeImageManager = PlaceImageManager()
     
     @State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
-
+    
     
     var rating: String {
         if place.rating != nil {
@@ -44,7 +44,7 @@ struct PlaceView: View {
                     Spacer(minLength: 100)
                     
                     Image(uiImage: placeImageManager.placeImage)
-                        .frame(width: 300,height: 300)
+                        .frame(width: 300, height: 300)
                         .clipShape(Circle())
                         .overlay(Circle().stroke(place.openColour, lineWidth: 5))
                         
@@ -66,25 +66,38 @@ struct PlaceView: View {
                 Button("Directions") {
                     let url = URL(string: "maps://?saddr=&daddr=\(place.latComp),\(place.lonComp)")
                     if UIApplication.shared.canOpenURL(url!) {
-                          UIApplication.shared.open(url!, options: [:], completionHandler: nil)
-                    }
-                }
-                .buttonStyle(.borderedProminent)
-                Button("Favourite") {
-                    //region.center = CLLocationCoordinate2D(latitude: place.latComp, longitude: place.lonComp)
-                    region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: place.latComp, longitude: place.lonComp), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-                    
-                    if favouriteManager.favourites.contains(where: {favourite in favourite.id == place.id}) {
-                        print("already favourited")
-                    } else {
-                        let newFavourite = Favourite(name: place.placeName, id: place.id)
-                        favouriteManager.favourites.append(newFavourite)
-                        favouriteManager.saveFavourites()
+                        UIApplication.shared.open(url!, options: [:], completionHandler: nil)
                     }
                 }
                 .buttonStyle(.borderedProminent)
                 
+                if favouriteManager.favourites.contains(where: {favourite in favourite.id == place.id}) {
+                    
+                    Button("UnFavourite") {
 
+                        favouriteManager.favourites.removeAll { favPlace in
+                            return favPlace.id == place.id
+                          }
+                        favouriteManager.saveFavourites()
+                        favouriteManager.loadFavourites()
+                    }
+                    .buttonStyle(.borderedProminent)
+                } else {
+
+                    Button("Favourite") {
+                        //region.center = CLLocationCoordinate2D(latitude: place.latComp, longitude: place.lonComp)
+                        region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: place.latComp, longitude: place.lonComp), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+
+                            let newFavourite = Favourite(name: place.placeName, id: place.id)
+                            favouriteManager.favourites.append(newFavourite)
+                        favouriteManager.saveFavourites()
+                        favouriteManager.loadFavourites()
+
+                    }
+                    .buttonStyle(.borderedProminent)
+                    
+                }
+                
             }
         }
         .onAppear {
@@ -104,6 +117,7 @@ struct favouritePlaceView: View {
     @ObservedObject var placesManager: PlacesManager
     
     let place_id: String
+
     var body: some View {
         
         if placesManager.favouritePlace != nil {
@@ -123,6 +137,7 @@ struct favouritePlaceView: View {
                     placesManager.fetchPlaceDetails(place_id: place_id)
                 }
         }
+
     }
     
 }

@@ -9,13 +9,14 @@ import SwiftUI
 
 struct FavouritePlacesView: View {
     
-    @StateObject var favouriteManager = FavouritePlaces()
+    @State var favouriteManager = FavouritePlaces()
     @StateObject var placesManager = PlacesManager()
     var body: some View {
         NavigationView {
             VStack {
                 Text("GoDoo! Again")
                     .font(.largeTitle)
+                    
                 
                 List { ForEach(favouriteManager.favourites) { favourite in
                     NavigationLink(favourite.name, destination: favouritePlaceView(placesManager: placesManager, place_id: favourite.id))
@@ -26,10 +27,10 @@ struct FavouritePlacesView: View {
                 }
                 }
             }
-        }
-        .onAppear {
-            favouriteManager.loadFavourites()
-            placesManager.favouritePlace = nil
+            .onAppear {
+                favouriteManager.loadFavourites()
+                placesManager.favouritePlace = nil
+            }
         }
     }
 }
