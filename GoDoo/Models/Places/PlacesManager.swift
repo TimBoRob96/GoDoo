@@ -38,7 +38,7 @@ class PlacesManager: ObservableObject{
         let nearByURL = placesURL + nearBy
         let urlString = "\(nearByURL)/json?location=\(latitude),\(longitude)&radius=\(radius)&key=\(apiKey)&keyword=\(keyword)"
         
-        let radiusDelta = Double(radius)/110.0
+        let radiusDelta = Double(radius)/110000
         
         region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), span: MKCoordinateSpan(latitudeDelta: radiusDelta, longitudeDelta: radiusDelta))
         

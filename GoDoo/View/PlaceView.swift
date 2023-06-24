@@ -14,54 +14,85 @@ import MapKit
 
 struct PlaceView: View {
     
+    //Setting place
     let place: Place
+    
+    //Manager objects
     @ObservedObject var favouriteManager = FavouritePlaces()
     @ObservedObject var placeImageManager = PlaceImageManager()
     
-    @State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
+    //Region
+    @State var region: MKCoordinateRegion// = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
     
-    
+    //Place rating - To Review?
     var rating: String {
         if place.rating != nil {
-            return String(place.rating!) + "Stars"
+            return String(place.rating!)
         } else {
-            return "No Rating"
+            return "?"
         }
     }
     
     var body: some View {
         VStack {
+            //Place Name and open/closed text
             Text(place.placeName)
                 .font(.largeTitle)
-            Text(rating)
-                .font(.headline)
             if place.open != nil {
                 Text(place.open! ? "Open Now" : "Closed Right Now").foregroundColor(place.openColour)
             }
             
+            //This is where I want the bubbleview to be, I want to have the map, image and rating all to show in a similiar circle view which we can scroll between.
+            //MARK: - Current Work Point
             ScrollView(.horizontal) {
-                HStack {
-                    Spacer(minLength: 100)
-                    
-                    Image(uiImage: placeImageManager.placeImage)
-                        .frame(width: 300, height: 300)
-                        .clipShape(Circle())
-                        .overlay(Circle().stroke(place.openColour, lineWidth: 5))
-                        
-                    Spacer(minLength: 200)
-                    
-                    Map(coordinateRegion: $region, annotationItems: [place]) { placeMark in
-                        MapMarker(coordinate: placeMark.coordinate)
-                        
-                    }
-                    .frame(width: 300, height: 300)
-                    .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
-                    .overlay(Circle().stroke(place.openColour, lineWidth: 5))
-                    Spacer(minLength: 100)
 
+                HStack(spacing: 200) {
+                        
+
+                        GeometryReader { geo in
+                            Map(coordinateRegion: $region, annotationItems: [place]) { placeMark in
+                                MapMarker(coordinate: placeMark.coordinate)
+                                
+                            }
+                            
+                            .allowsHitTesting(false)
+                            .frame(width: 300, height: 300)
+                            .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                            .overlay(Circle().stroke(place.openColour, lineWidth: 5))
+                            .rotation3DEffect(.degrees(geo.frame(in: .global).minX / 3), axis: (x: 0, y: 1, z: 0))
+                        }
+                        
+                    GeometryReader { geo in
+                        Image(uiImage: placeImageManager.placeImage)
+                            .frame(width: 300, height: 300)
+                            .clipShape(Circle())
+                            .overlay(Circle().stroke(place.openColour, lineWidth: 5))
+                            .rotation3DEffect(.degrees(geo.frame(in: .global).minX / 3), axis: (x: 0, y: 1, z: 0))
+                    }
+                            
+                    GeometryReader { geo in
+                        Circle()
+                            .overlay {
+                                HStack {
+                                    Text(rating)
+                                        .font(.largeTitle)
+                                        .fontWeight(.black)
+                                        .foregroundColor(.yellow)
+                                    Image(uiImage: UIImage(systemName: "star")!)
+                                }
+                            }
+                            .foregroundColor(.blue)
+                            .frame(width: 300, height: 300)
+                            .clipShape(Circle())
+                            .overlay(Circle().stroke(place.openColour, lineWidth: 5))
+                            .rotation3DEffect(.degrees(geo.frame(in: .global).minX / 3), axis: (x: 0, y: 1, z: 0))
+                    }
+                    
                 }
             }
+            .scrollIndicators(.hidden)
             
+            //Button for opening the maps app for directions.
             HStack{
                 Button("Directions") {
                     let url = URL(string: "maps://?saddr=&daddr=\(place.latComp),\(place.lonComp)")
@@ -71,6 +102,8 @@ struct PlaceView: View {
                 }
                 .buttonStyle(.borderedProminent)
                 
+                
+                //Favourite / Unfavourite button
                 if favouriteManager.favourites.contains(where: {favourite in favourite.id == place.id}) {
                     
                     Button("UnFavourite") {
@@ -100,9 +133,11 @@ struct PlaceView: View {
                 
             }
         }
+        
+        //On appearance of the screen we load the placeImage and we load our favourites.
         .onAppear {
             
-            region.center = CLLocationCoordinate2D(latitude: place.latComp, longitude: place.lonComp)
+            //region.center = CLLocationCoordinate2D(latitude: place.latComp, longitude: place.lonComp)
             favouriteManager.loadFavourites()
             if place.photoRef != nil {
                 placeImageManager.getPlaceImage(imageID: place.photoRef!)
@@ -111,6 +146,8 @@ struct PlaceView: View {
         }
     }
 }
+
+//Our favourite placeview loads a placeview but calls the placeID api to get the details instead of the list of nearby places api
 
 struct favouritePlaceView: View {
     
@@ -122,7 +159,7 @@ struct favouritePlaceView: View {
         
         if placesManager.favouritePlace != nil {
             if placesManager.favouritePlace?.id == place_id {
-                PlaceView(place: placesManager.favouritePlace!)
+                PlaceView(place: placesManager.favouritePlace!, region: MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)))
             }
             else {
                 ProgressView()
@@ -145,7 +182,7 @@ struct favouritePlaceView: View {
 
 
 
-
+//
 //struct PlaceView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        PlaceView(placeName: "Test", placeRating: 0.01)

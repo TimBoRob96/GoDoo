@@ -17,16 +17,21 @@ struct ContentView: View {
     @State var userLocation = ""
     
     var body: some View {
+        
+        // Our Tabs are GoDoo & Favourites
         TabView {
-            
+            // Top Level Navigation View, all our views are loaded on top of this!
             NavigationView {
                 
                 VStack {
+                    
+                    //Logo
                     Image("Godoo")
                         .resizable()
                         .frame(width: 300,height: 300)
                         .padding(.vertical)
                     
+                     // Use Current Location button here
                     NavigationLink(destination: KeywordListView(locationManager: locationManager, userEnteredLocation: nil, currentLocation: true)) {
                         Text("Use Current Location")
                     }
@@ -35,6 +40,7 @@ struct ContentView: View {
                     .foregroundColor(.cyan)
                     .padding()
                     
+                    //Here we can type in a custom location into a text field
                     HStack {
                         TextField("Enter a location", text: $userLocation)
                             .textFieldStyle(.roundedBorder)
@@ -43,6 +49,8 @@ struct ContentView: View {
                         } .buttonStyle(.borderedProminent)
                     }
                     .padding(.horizontal)
+                    
+                    //On appearance of the start screen, called when user starts app and goes back to the first screen.
                 }
                 .onAppear {
                     locationManager.hasFinishedLoading = false
@@ -52,7 +60,7 @@ struct ContentView: View {
                     print("cont")
                 }
             }
-            //MARK: - Tab menu at bottom of screen
+            //Tab menu at bottom of screen
             .tabItem {
                 Image(systemName: "mappin.circle.fill")
                 Text("GoDoo!")

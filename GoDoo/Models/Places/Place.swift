@@ -57,6 +57,5 @@ struct Place: Identifiable {
         return String(format: "%.2f" ,distance/1000)
     }
     
-    //=acos(sin(lat1)*sin(lat2)+cos(lat1)*cos(lat2)*cos(lon2-lon1))*6371
     
 }

@@ -40,8 +40,8 @@ struct LoadingLocationView: View {
 }
 
 
-//struct LoadingView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        LoadingView(locationManager: <#LocationManager#>)
-//    }
-//}
+struct LoadingView_Previews: PreviewProvider {
+    static var previews: some View {
+        LoadingLocationView(locationManager: LocationManager(), currentLocation: false, userEnteredLocation: "Test")
+    }
+}

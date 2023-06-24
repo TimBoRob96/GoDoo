@@ -10,11 +10,14 @@ import MapKit
 
 struct PlaceListMapView: View {
     
+    //Loading the placesmanager and setting the map region
     @ObservedObject var placesManager: PlacesManager
     @State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
     
     var body: some View {
+        //Title
         Text("Map of Places")
+        //button to centre map - to review!
         Button("Go") {
             region.center = placesManager.coordinate!
         }
@@ -23,12 +26,15 @@ struct PlaceListMapView: View {
                 region.center = placesManager.coordinate!
             }
         
+        //Handling a nil region - To review?
         if placesManager.region != nil {
+            
+            //Adding the placemarks for each place
             Map(coordinateRegion: $region, annotationItems: placesManager.placesList) { placeMark in
                 
                 MapAnnotation(coordinate: placeMark.coordinate) {
                   NavigationLink {
-                    PlaceView(place: placeMark)
+                      PlaceView(place: placeMark, region: placesManager.region ?? MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)))
                   } label: {
                     PlaceAnnotationView(title: placeMark.placeName)
                   }

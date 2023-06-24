@@ -9,15 +9,18 @@ import SwiftUI
 
 struct FavouritePlacesView: View {
     
+    //Manager objects!
     @State var favouriteManager = FavouritePlaces()
     @StateObject var placesManager = PlacesManager()
+    
     var body: some View {
         NavigationView {
             VStack {
+                //Title here
                 Text("GoDoo! Again")
                     .font(.largeTitle)
                     
-                
+                //List of facourites
                 List { ForEach(favouriteManager.favourites) { favourite in
                     NavigationLink(favourite.name, destination: favouritePlaceView(placesManager: placesManager, place_id: favourite.id))
                 }
@@ -27,6 +30,7 @@ struct FavouritePlacesView: View {
                 }
                 }
             }
+            //Loading our favourites here
             .onAppear {
                 favouriteManager.loadFavourites()
                 placesManager.favouritePlace = nil
