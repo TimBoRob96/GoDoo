@@ -22,7 +22,7 @@ struct PlaceView: View {
     @ObservedObject var placeImageManager = PlaceImageManager()
     
     //Region
-    @State var region: MKCoordinateRegion// = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
+    @State var region: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
     
     //Place rating - To Review?
     var rating: String {
@@ -42,55 +42,8 @@ struct PlaceView: View {
                 Text(place.open! ? "Open Now" : "Closed Right Now").foregroundColor(place.openColour)
             }
             
-            //This is where I want the bubbleview to be, I want to have the map, image and rating all to show in a similiar circle view which we can scroll between.
-            //MARK: - Current Work Point
-            ScrollView(.horizontal) {
-
-                HStack(spacing: 200) {
-                        
-
-                        GeometryReader { geo in
-                            Map(coordinateRegion: $region, annotationItems: [place]) { placeMark in
-                                MapMarker(coordinate: placeMark.coordinate)
-                                
-                            }
-                            
-                            .allowsHitTesting(false)
-                            .frame(width: 300, height: 300)
-                            .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
-                            .overlay(Circle().stroke(place.openColour, lineWidth: 5))
-                            .rotation3DEffect(.degrees(geo.frame(in: .global).minX / 3), axis: (x: 0, y: 1, z: 0))
-                        }
-                        
-                    GeometryReader { geo in
-                        Image(uiImage: placeImageManager.placeImage)
-                            .frame(width: 300, height: 300)
-                            .clipShape(Circle())
-                            .overlay(Circle().stroke(place.openColour, lineWidth: 5))
-                            .rotation3DEffect(.degrees(geo.frame(in: .global).minX / 3), axis: (x: 0, y: 1, z: 0))
-                    }
-                            
-                    GeometryReader { geo in
-                        Circle()
-                            .overlay {
-                                HStack {
-                                    Text(rating)
-                                        .font(.largeTitle)
-                                        .fontWeight(.black)
-                                        .foregroundColor(.yellow)
-                                    Image(uiImage: UIImage(systemName: "star")!)
-                                }
-                            }
-                            .foregroundColor(.blue)
-                            .frame(width: 300, height: 300)
-                            .clipShape(Circle())
-                            .overlay(Circle().stroke(place.openColour, lineWidth: 5))
-                            .rotation3DEffect(.degrees(geo.frame(in: .global).minX / 3), axis: (x: 0, y: 1, z: 0))
-                    }
-                    
-                }
-            }
-            .scrollIndicators(.hidden)
+            CoinFlipView(place: place, placeImageManager: placeImageManager)
+            
             
             //Button for opening the maps app for directions.
             HStack{
@@ -119,7 +72,8 @@ struct PlaceView: View {
 
                     Button("Favourite") {
                         //region.center = CLLocationCoordinate2D(latitude: place.latComp, longitude: place.lonComp)
-                        region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: place.latComp, longitude: place.lonComp), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+//                        region = MKCoordinateRegion(center: place.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+                        //region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: place.latComp, longitude: place.lonComp), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
 
                             let newFavourite = Favourite(name: place.placeName, id: place.id)
                             favouriteManager.favourites.append(newFavourite)
@@ -159,7 +113,7 @@ struct favouritePlaceView: View {
         
         if placesManager.favouritePlace != nil {
             if placesManager.favouritePlace?.id == place_id {
-                PlaceView(place: placesManager.favouritePlace!, region: MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)))
+                PlaceView(place: placesManager.favouritePlace!)//, region: MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)))
             }
             else {
                 ProgressView()

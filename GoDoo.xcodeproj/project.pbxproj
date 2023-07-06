@@ -12,6 +12,7 @@
 		90A49ED62A474590000A8D5D /* AppExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A49ED52A474590000A8D5D /* AppExtensions.swift */; };
 		90A698282A21F6D4007519E5 /* FavouritePlacesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A698272A21F6D4007519E5 /* FavouritePlacesView.swift */; };
 		90A6982A2A21F766007519E5 /* FavouritePlaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A698292A21F766007519E5 /* FavouritePlaces.swift */; };
+		90B0C0E62A51DFFC006F1D6F /* CoinFlipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B0C0E52A51DFFC006F1D6F /* CoinFlipView.swift */; };
 		90B680922A3EFB7200B4BB22 /* PlaceImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B680912A3EFB7200B4BB22 /* PlaceImageManager.swift */; };
 		90F548662A1BEA8B0042FA0F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 90F548652A1BEA8B0042FA0F /* README.md */; };
 		90F5E9552A18C4040062CC8B /* GoDooApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F5E9542A18C4040062CC8B /* GoDooApp.swift */; };
@@ -34,6 +35,7 @@
 		90A49ED52A474590000A8D5D /* AppExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppExtensions.swift; sourceTree = "<group>"; };
 		90A698272A21F6D4007519E5 /* FavouritePlacesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritePlacesView.swift; sourceTree = "<group>"; };
 		90A698292A21F766007519E5 /* FavouritePlaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritePlaces.swift; sourceTree = "<group>"; };
+		90B0C0E52A51DFFC006F1D6F /* CoinFlipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinFlipView.swift; sourceTree = "<group>"; };
 		90B680912A3EFB7200B4BB22 /* PlaceImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceImageManager.swift; sourceTree = "<group>"; };
 		90F548652A1BEA8B0042FA0F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		90F5E9512A18C4040062CC8B /* GoDoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoDoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -124,6 +126,7 @@
 				907DCDBC2A2FC02C0092BA37 /* PlaceListMapView.swift */,
 				90F5E98E2A18C9F80062CC8B /* PlaceView.swift */,
 				90A698272A21F6D4007519E5 /* FavouritePlacesView.swift */,
+				90B0C0E52A51DFFC006F1D6F /* CoinFlipView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 				90F5E9822A18C4470062CC8B /* PlacesData.swift in Sources */,
 				90A6982A2A21F766007519E5 /* FavouritePlaces.swift in Sources */,
 				90F5E9942A18C9F80062CC8B /* PlaceView.swift in Sources */,
+				90B0C0E62A51DFFC006F1D6F /* CoinFlipView.swift in Sources */,
 				90F5E9932A18C9F80062CC8B /* PlacesListView.swift in Sources */,
 				90F5E9922A18C9F80062CC8B /* ContentView.swift in Sources */,
 				90F5E97F2A18C4470062CC8B /* Place.swift in Sources */,

@@ -8,6 +8,8 @@ If you would like to clone and build this app yourself you will need to get your
 
 If you would like to contribute or contact me regarding the project please get in touch via: timroberts96@icloud.com
 
+Strava? 
+
 
 List of future updates: 
 
